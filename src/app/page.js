@@ -22,17 +22,18 @@ writeFile(
   '{ "hello": "world" }'
 );
 */
-const previousHits = JSON.parse(readFile('./src/database.json')).hits;
-const currentHits = previousHits + 1;
-
-const newHitsObj = {hits: previousHits + 1};
-writeFile('./src/database.json', JSON.stringify(newHitsObj));
 
 function Home() {
+  let { hits } = JSON.parse(readFile(DATABASE_PATH));
+
+  hits += 1;
+
+  writeFile(DATABASE_PATH, JSON.stringify({ hits }));
+
   return (
     <main>
       <h1>Welcome!</h1>
-      <p>You are visitor number {currentHits}</p>
+      <p>You are visitor number {hits}</p>
     </main>
   );
 }
