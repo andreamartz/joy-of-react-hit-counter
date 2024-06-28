@@ -22,12 +22,17 @@ writeFile(
   '{ "hello": "world" }'
 );
 */
+const previousHits = JSON.parse(readFile('./src/database.json')).hits;
+const currentHits = previousHits + 1;
+
+const newHitsObj = {hits: previousHits + 1};
+writeFile('./src/database.json', JSON.stringify(newHitsObj));
 
 function Home() {
   return (
     <main>
       <h1>Welcome!</h1>
-      <p>You are visitor number X.</p>
+      <p>You are visitor number {currentHits}</p>
     </main>
   );
 }
